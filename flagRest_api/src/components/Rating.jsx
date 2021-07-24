@@ -22,11 +22,10 @@ const Rating = (props) => {
     sessionStorage.setItem('liked',JSON.stringify(liked));
     }
     useEffect(() => {
-   
-  
-console.log(liked)
     fetchCountriesData();
   }, []);
+  const [islikedd,setlikedd] = useState(false);
+  const ab=JSON.parse(sessionStorage.getItem('liked'))
   
   // const handleLike = (index) => {
   //   liked[index]=true;
@@ -49,27 +48,29 @@ console.log(liked)
                 <div>
                   <button onClick={(e)=>{
                     e.preventDefault(); 
-                    const ab=JSON.parse(sessionStorage.getItem('liked'))
                     ab[index]=true;
+                    setlikedd(true);
                     sessionStorage.setItem('liked',JSON.stringify(ab))
                     console.log(liked);}}>
                     <FontAwesomeIcon
                       icon={faThumbsUp}
-                      style={{ paddingRight: 5 }}
+                      style={{ paddingRight: 5,color: "red" }}
                     />
                   </button>
                   <button onClick={(e)=>{
                     e.preventDefault(); 
-                    const ab=JSON.parse(sessionStorage.getItem('liked'))
                     ab[index]=false;
+                    setlikedd(false);
                     sessionStorage.setItem('liked',JSON.stringify(ab))
                     console.log(liked);}}>
+                      
                       <FontAwesomeIcon
                       icon={faThumbsDown}
                       style={{ paddingLeft: 5 }}
                     />
                   </button>
                 </div>
+                <p>{ab[index]?"Liked":"Disliked"}</p>
               </div>
             </article>
           );
